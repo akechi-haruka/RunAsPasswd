@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
     PROCESS_INFORMATION pi;
     ZeroMemory(&si, sizeof(si));
     string username, password, domain, args, command;
-    DWORD netonly;
+    DWORD netonly = LOGON_WITH_PROFILE;
     for (int i = 1; i < argc; i++) {
         string arg = argv[i];
         if (arg == "-u" || arg == "--username") {
@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
             }
         }
         else if (arg == "-n" || arg == "--netonly") {
-            netonly = 0x00000002;
+            netonly = LOGON_NETCREDENTIALS_ONLY;
             cout << "[!] Running with the NETLOGON flag may result in session creation with invalid credentials.\n";
         }
     }
